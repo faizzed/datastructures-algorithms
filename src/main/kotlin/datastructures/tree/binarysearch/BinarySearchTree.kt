@@ -368,5 +368,6 @@ fun main() {
         }
         search(18).also(::println)
         search(118).also(::println)
+        contains(5).also(::println)
     }
 }
