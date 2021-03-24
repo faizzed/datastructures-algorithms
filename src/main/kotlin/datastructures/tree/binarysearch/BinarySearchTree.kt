@@ -84,40 +84,32 @@ class BinarySearchTree: Comparator<Int> {
      * Start at the root node, and traverse the tree left or right depending on compare operation result
      * */
     fun contains(data: Int): Boolean {
-        return contains(root, data) != null
+        return search(root, data) != null
     }
 
-    fun find(data: Int): Node? {
-        return contains(root, data)
+    fun search(data: Int): Node? {
+        val node = search(root, data)
+        if (node != null) {
+            // this isn't necessary but anyway..
+            return Node(node.data, null, null)
+        }
+        return node
     }
 
-    private fun contains(node: Node?, data: Int): Node? {
-
-        var response: Node? = null
-
+    private fun search(node: Node?, data: Int): Node? {
         if (node == null) {
-            return response
+            return null
         }
 
-        if (data == node.data) {
-            return Node(data, null, null)
+        if (node.data == data) {
+            return node
         }
 
         if (compare(node.data, data) < 0) {
-            if (node.right != null) {
-                contains(node.right, data)?.let {
-                    response = it
-                }
-            }
+            return search(node.right, data)
         } else {
-            if (node.left != null) {
-                contains(node.left, data)?.let {
-                    response = it
-                }
-            }
+            return search(node.left, data)
         }
-
-        return response
     }
 
     /**
@@ -224,8 +216,118 @@ class BinarySearchTree: Comparator<Int> {
         return node
     }
 
-    fun height() {
-        
+    /**
+     * Find the height of the tree.
+     * The height of the tree is the is number of nodes between the root upto the farthest node in either
+     * left or right sub-tree
+     *
+     * We need to pass both left and right sub-tree recursively. At the end of each call to the node unless its not null
+     * we return + 1
+     *
+     * This works as follows
+     *
+     * e.g
+     *      2
+     *     /\
+     *    5  9
+     *   /
+     *  0
+     *
+     *  suppose the left sub-tree since its the tallest one.
+     *  when root 2 calls height on left sub-tree, The call stack is as follows
+     *  5 calls 0
+     *  0 calls null
+     *
+     *  null return 0
+     *  0 return (return from null) + 1 -> 1
+     *  5 return (return from 0) + 1 -> 2
+     *
+     *  That's the end of this sub-tree
+     * */
+    fun height(): Int {
+        return height(root)
+    }
+
+    private fun height(node: Node?): Int {
+        if (node == null) {
+            return 0
+        }
+
+        return Math.max(height(node.right), height(node.left)) + 1
+    }
+
+    /**
+    * Tree can be traversed differently since they arent linear.
+     * Pre order traversal is one way to visit the tree.
+     * It prints the tree starting from root and traversing the left branches then going over to the right branches
+     *
+     *      2
+     *     /\
+     *    0  5
+     *      / \
+     *     4   9
+     *
+     *  prints 2, 0, 5, 4, 9
+     * The name itself gives enough idea, the data at node is printed before its traversed. This is as simple
+     * as reading the tree from top and going from left to right.
+    * */
+    fun preOrderTraversal() {
+        preOrderTraversal(root)
+    }
+
+    /**
+     * Starting with root at any level, if the left sub-tree is not null, it traverses the left sub-tree
+     * and then the call is passed to the right sub-tree of that node.
+    * */
+    private fun preOrderTraversal(node: Node?) {
+        print("${node?.data}\t")
+        if (node?.left != null) preOrderTraversal(node.left)
+        if (node?.right != null) preOrderTraversal(node.right)
+    }
+
+    /**
+     * This starts traversing from top until it gets to the bottom left node.
+     * Then it prints. It prints the edges first and then recurse back to the root element.
+    * */
+    fun postOrderTraversal() {
+        postOrderTraversal(root)
+    }
+
+    private fun postOrderTraversal(node: Node?) {
+        if (node?.left != null) postOrderTraversal(node.left)
+        if (node?.right != null) postOrderTraversal(node.right)
+        print("${node?.data}\t")
+    }
+
+    /**
+     * The most interesting one.
+     * It prints the tree in ascending sorted order.
+     *
+     * The left sub-tree is always the smallest, if we start from there until we find the furthest node it
+     * will be the smallest node in this sub-tree
+    * */
+    fun inOrderTraversalAsc() {
+        inOrderTraversalAsc(root)
+    }
+
+    private fun inOrderTraversalAsc(node: Node?) {
+        if (node?.left != null) inOrderTraversalAsc(node.left)
+        print("${node?.data}\t")
+        if (node?.right != null) inOrderTraversalAsc(node.right)
+    }
+
+    /**
+     * The most interesting one.
+     * It prints the tree in ascending sorted order.
+    * */
+    fun inOrderTraversalDesc() {
+        inOrderTraversalDesc(root)
+    }
+
+    private fun inOrderTraversalDesc(node: Node?) {
+        if (node?.right != null) inOrderTraversalDesc(node.right)
+        print("${node?.data}\t")
+        if (node?.left != null) inOrderTraversalDesc(node.left)
     }
 
     override fun compare(el1: Int, el2: Int): Int {
@@ -245,13 +347,26 @@ fun main() {
         also(::println)
         contains(5).also(::println)
         contains(99).also(::println)
-        find(5).also(::println)
-        find(32).also(::println)
         minNode().also(::println)
         maxNode().also(::println)
         remove(11)
         also(::println)
         remove(9)
         also(::println)
+        height().also(::println)
+        preOrderTraversal().also {
+            println()
+        }
+        postOrderTraversal().also {
+            println()
+        }
+        inOrderTraversalAsc().also {
+            println()
+        }
+        inOrderTraversalDesc().also {
+            println()
+        }
+        search(18).also(::println)
+        search(118).also(::println)
     }
 }

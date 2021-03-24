@@ -9,7 +9,7 @@ import datastructures.linkedlist.LinkedList
  * On another topic, Why do we even go as far as calling it a diff DT if the same operations can be
  * done via linked list and arrays?
 * */
-private data class Page(val number: Int)
+data class Page(val number: Int)
 
 /**
 * Stack
@@ -19,17 +19,22 @@ private data class Page(val number: Int)
  * 2. pop: take en element from the top of the stack.
  * 3. push and pop works in Last in first out (LIFO) fashion.
 * */
-private class Stack {
-    private val linkedList = LinkedList<Page>()
+class Stack<T> {
+    private val linkedList = LinkedList<T>()
 
-    fun push(p: Page) {
+    fun push(p: T) {
         linkedList.add(p)
     }
 
-    fun pop(): Page? {
+    fun pop(): T? {
         val page = linkedList.peek()
+        println(linkedList.size)
         linkedList.removeAt(linkedList.size-1)
         return page?.data
+    }
+
+    fun isEmpty(): Boolean {
+        return linkedList.size == 0
     }
 
     override fun toString(): String {
@@ -38,11 +43,15 @@ private class Stack {
 }
 
 fun main() {
-    val stack = Stack()
+    val stack = Stack<Page>()
     stack.push(Page(1))
     stack.push(Page(2))
     stack.push(Page(3))
     stack.also(::println)
+    stack.isEmpty().also(::println)
 
     stack.pop().also(::println)
+    stack.pop().also(::println)
+    stack.pop().also(::println)
+    stack.also(::println)
 }
