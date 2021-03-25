@@ -1,14 +1,8 @@
 package datastructures.tree.binarysearch
 
+import datastructures.misc.Node
+import datastructures.misc.TreePrinter
 import java.util.*
-
-data class Node(var data: Int, var left: Node?, var right: Node?) {
-    override fun toString(): String {
-        return """
-            {data=$data, left=$left, right=$right}
-        """.trimIndent()
-    }
-}
 
 /**
  * A binary search tree is a sorted search tree with properties as follows
@@ -21,7 +15,7 @@ data class Node(var data: Int, var left: Node?, var right: Node?) {
  *  This makes BST better than unsorted arrays.
 * */
 class BinarySearchTree: Comparator<Int> {
-    private var root: Node? = null
+    private var root: Node<Int>? = null
 
     /**
      * Recursively find the left or right sub-tree node where the data must be added
@@ -63,7 +57,7 @@ class BinarySearchTree: Comparator<Int> {
         }
     }
 
-    private fun add(node: Node?, data: Int): Node {
+    private fun add(node: Node<Int>?, data: Int): Node<Int> {
         var _node = node
         if (_node == null) {
             _node = Node(data, null, null)
@@ -87,7 +81,7 @@ class BinarySearchTree: Comparator<Int> {
         return search(root, data) != null
     }
 
-    fun search(data: Int): Node? {
+    fun search(data: Int): Node<Int>? {
         val node = search(root, data)
         if (node != null) {
             // this isn't necessary but anyway..
@@ -96,7 +90,7 @@ class BinarySearchTree: Comparator<Int> {
         return node
     }
 
-    private fun search(node: Node?, data: Int): Node? {
+    private fun search(node: Node<Int>?, data: Int): Node<Int>? {
         if (node == null) {
             return null
         }
@@ -158,7 +152,7 @@ class BinarySearchTree: Comparator<Int> {
         root = remove(root, data)
     }
 
-    private fun remove(node: Node?, data: Int): Node? {
+    private fun remove(node: Node<Int>?, data: Int): Node<Int>? {
         // tree is empty
         if (node == null) {
             return null
@@ -192,7 +186,7 @@ class BinarySearchTree: Comparator<Int> {
         return node
     }
 
-    fun minNode(): Node? {
+    fun minNode(): Node<Int>? {
         var node = root
         while (node?.left != null) {
             node = node.left
@@ -200,7 +194,7 @@ class BinarySearchTree: Comparator<Int> {
         return node
     }
 
-    private fun minOnDemand(_node: Node): Node {
+    private fun minOnDemand(_node: Node<Int>): Node<Int> {
         var node = _node
         while (node.left != null) {
             node = node.left!!
@@ -208,7 +202,7 @@ class BinarySearchTree: Comparator<Int> {
         return node
     }
 
-    fun maxNode(): Node? {
+    fun maxNode(): Node<Int>? {
         var node = root
         while (node?.right != null) {
             node = node.right
@@ -248,7 +242,7 @@ class BinarySearchTree: Comparator<Int> {
         return height(root)
     }
 
-    private fun height(node: Node?): Int {
+    private fun height(node: Node<Int>?): Int {
         if (node == null) {
             return 0
         }
@@ -279,7 +273,7 @@ class BinarySearchTree: Comparator<Int> {
      * Starting with root at any level, if the left sub-tree is not null, it traverses the left sub-tree
      * and then the call is passed to the right sub-tree of that node.
     * */
-    private fun preOrderTraversal(node: Node?) {
+    private fun preOrderTraversal(node: Node<Int>?) {
         print("${node?.data}\t")
         if (node?.left != null) preOrderTraversal(node.left)
         if (node?.right != null) preOrderTraversal(node.right)
@@ -293,7 +287,7 @@ class BinarySearchTree: Comparator<Int> {
         postOrderTraversal(root)
     }
 
-    private fun postOrderTraversal(node: Node?) {
+    private fun postOrderTraversal(node: Node<Int>?) {
         if (node?.left != null) postOrderTraversal(node.left)
         if (node?.right != null) postOrderTraversal(node.right)
         print("${node?.data}\t")
@@ -310,7 +304,7 @@ class BinarySearchTree: Comparator<Int> {
         inOrderTraversalAsc(root)
     }
 
-    private fun inOrderTraversalAsc(node: Node?) {
+    private fun inOrderTraversalAsc(node: Node<Int>?) {
         if (node?.left != null) inOrderTraversalAsc(node.left)
         print("${node?.data}\t")
         if (node?.right != null) inOrderTraversalAsc(node.right)
@@ -324,7 +318,7 @@ class BinarySearchTree: Comparator<Int> {
         inOrderTraversalDesc(root)
     }
 
-    private fun inOrderTraversalDesc(node: Node?) {
+    private fun inOrderTraversalDesc(node: Node<Int>?) {
         if (node?.right != null) inOrderTraversalDesc(node.right)
         print("${node?.data}\t")
         if (node?.left != null) inOrderTraversalDesc(node.left)
@@ -338,6 +332,13 @@ class BinarySearchTree: Comparator<Int> {
         return """
             BST(root=$root)
         """.trimIndent()
+    }
+
+    /**
+     * For a large set the graph may break. This is because of the screen size i guess.
+    */
+    fun printGraph() {
+        TreePrinter.print(root)
     }
 }
 
@@ -369,5 +370,6 @@ fun main() {
         search(18).also(::println)
         search(118).also(::println)
         contains(5).also(::println)
+        printGraph()
     }
 }
