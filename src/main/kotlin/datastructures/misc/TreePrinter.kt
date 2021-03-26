@@ -10,7 +10,10 @@ interface PrintableNode<T> {
 
 class TreePrinter {
     companion object {
-        fun <T> print(root: PrintableNode<T>?) {
+        /**
+        * assign minus values to shrink the tree if its going out of the screen.
+        * */
+        fun <T> print(root: PrintableNode<T>?, shrinkTree: Int = 4) {
             val lines: MutableList<List<String?>> = ArrayList()
             var level: MutableList<PrintableNode<T>?> = ArrayList()
             var next: MutableList<PrintableNode<T>?> = ArrayList()
@@ -42,7 +45,7 @@ class TreePrinter {
                 next = tmp
                 next.clear()
             }
-            var perpiece = lines[lines.size - 1].size * (widest - 1)
+            var perpiece = lines[lines.size - 1].size * (widest + shrinkTree)
             for (i in lines.indices) {
                 val line = lines[i]
                 val hpw = Math.floor((perpiece / 2f).toDouble()).toInt() - 1
