@@ -10,8 +10,12 @@ Data structures and algorithms:
 - heap
 - trie
 - Binary search tree
+- Red Black Tree
+- Segment Tree
 - ....
 
 ##### Algorithms:
+- Strings:
+  - String reversal
 - ...
 
