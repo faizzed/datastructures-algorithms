@@ -21,7 +21,7 @@ package datastructures.heap
  * Right child = 2(i)+2
  *
  * To determine the parent of a child
- * Parent = 2(i-1)/2
+ * Parent = (i-1)/2
  *
  * Using these formulas we can sift up (max heap) or sift down (min heap) our elements to make a heap.
 * */

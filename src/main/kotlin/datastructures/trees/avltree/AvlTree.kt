@@ -1,5 +1,6 @@
-package datastructures.tree.avl
+package datastructures.trees.avltree
 
+import datastructures.misc.AvlNode
 import datastructures.misc.Node
 import datastructures.misc.TreePrinter
 import java.util.*
@@ -40,7 +41,7 @@ import java.util.*
  *
 * */
 class AvlTree: Comparator<Int> {
-    private var root: Node<Int>? = null
+    private var root: AvlNode<Int>? = null
 
     /**
      * Inserting elements into AVL tree is similar to BST.
@@ -57,9 +58,9 @@ class AvlTree: Comparator<Int> {
         }
     }
 
-    private fun insert(node: Node<Int>?, data: Int): Node<Int>? {
+    private fun insert(node: AvlNode<Int>?, data: Int): AvlNode<Int>? {
         if (node == null) {
-            return Node(data, null, null)
+            return AvlNode(data, null, null)
         }
 
         // data given is greater than root node
@@ -86,7 +87,7 @@ class AvlTree: Comparator<Int> {
         root = remove(root, data)
     }
 
-    private fun remove(node: Node<Int>?, data: Int): Node<Int>? {
+    private fun remove(node: AvlNode<Int>?, data: Int): AvlNode<Int>? {
         if (node == null) {
             return null
         }
@@ -130,7 +131,7 @@ class AvlTree: Comparator<Int> {
      * (2) recursion 3 (inserting 3): height => 1 + 1 = 2, balance factor => 1 - 0 = 1
      * (2) recursion 4 (inserting 6): height => 1 + 1 = 2, balance factor => 1 - 0 = 1
     * */
-    private fun update(node: Node<Int>?) {
+    private fun update(node: AvlNode<Int>?) {
         val heightLeft = if (node?.left != null) node.left!!.height else -1
         val heightRight = if (node?.right != null) node.right!!.height else -1
 
@@ -151,7 +152,7 @@ class AvlTree: Comparator<Int> {
      * -n represents a left heavy tree since right-left (3-5) = -2 means left is heavy.
      * +n represents that right is heavy, since right-left or (5-3) = +2 represents that..
     * */
-    private fun balance(node: Node<Int>): Node<Int>? {
+    private fun balance(node: AvlNode<Int>): AvlNode<Int>? {
         // tree is left heavy
         if (node.balanceFactor == -2) {
             // left left heavy
@@ -191,25 +192,25 @@ class AvlTree: Comparator<Int> {
      *
      * left/right depends on where the tree is tilting.
     * */
-    private fun leftLeftRotation(node: Node<Int>): Node<Int>? {
+    private fun leftLeftRotation(node: AvlNode<Int>): AvlNode<Int>? {
         return rightRotation(node)
     }
 
-    private fun rightRightRotation(node: Node<Int>): Node<Int>? {
+    private fun rightRightRotation(node: AvlNode<Int>): AvlNode<Int>? {
         return leftRotation(node)
     }
 
-    private fun leftRightRotation(node: Node<Int>): Node<Int>? {
+    private fun leftRightRotation(node: AvlNode<Int>): AvlNode<Int>? {
         node.left = leftRotation(node.left!!)
         return leftLeftRotation(node)
     }
 
-    private fun rightLeftRotation(node: Node<Int>): Node<Int>? {
+    private fun rightLeftRotation(node: AvlNode<Int>): AvlNode<Int>? {
         node.right = rightRotation(node.right!!)
         return rightRightRotation(node)
     }
 
-    private fun rightRotation(node: Node<Int>): Node<Int>? {
+    private fun rightRotation(node: AvlNode<Int>): AvlNode<Int>? {
         val newParent = node.left
         node.left = newParent?.right
         newParent?.right = node
@@ -218,7 +219,7 @@ class AvlTree: Comparator<Int> {
         return newParent
     }
 
-    private fun leftRotation(node: Node<Int>): Node<Int>? {
+    private fun leftRotation(node: AvlNode<Int>): AvlNode<Int>? {
         val newParent = node.right
         node.right = newParent?.left
         newParent?.left = node
@@ -227,7 +228,7 @@ class AvlTree: Comparator<Int> {
         return newParent
     }
 
-    private fun findMin(node: Node<Int>): Node<Int> {
+    private fun findMin(node: AvlNode<Int>): AvlNode<Int> {
         var min = node
         while (min.left != null) {
             min = min.left!!
@@ -236,10 +237,10 @@ class AvlTree: Comparator<Int> {
         return min
     }
 
-    fun search(data: Int): Node<Int>? {
+    fun search(data: Int): AvlNode<Int>? {
         val res = search(root, data)
         if (res != null) {
-            return Node(res.data, null, null)
+            return AvlNode(res.data, null, null)
         }
 
         return res
@@ -250,7 +251,7 @@ class AvlTree: Comparator<Int> {
      * Compare and start looking in either sub-tree until its found
      * or return null
     * */
-    private fun search(node: Node<Int>?, data: Int): Node<Int>? {
+    private fun search(node: AvlNode<Int>?, data: Int): AvlNode<Int>? {
         if (node == null) {
             return null
         }

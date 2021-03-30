@@ -1,4 +1,4 @@
-package datastructures.tree.binarysearch
+package datastructures.trees.binarysearchtree
 
 import datastructures.misc.Node
 import datastructures.misc.TreePrinter
