@@ -3,12 +3,12 @@ Data structures and algorithms:
 
 #### Data Structures:
 
-- linked list
-- stack
-- queue
-- hashmap
-- heap
-- trie
+- Linked list
+- Stack
+- Queue
+- Hashmap
+- Heap
+- Trie
 - Binary search tree
 - Red Black Tree
 - Segment Tree
