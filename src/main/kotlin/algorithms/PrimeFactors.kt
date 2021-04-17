@@ -5,6 +5,12 @@ package algorithms
 
 import kotlin.math.sqrt
 
+/**
+ * To find prime factors of n
+ * Start with 2 since its the first prime number, keep dividing the number by 2 until its remainder is not equal to zero.
+ * Then start with 3, 5, 7, 9, 11 and keep repeating the same until we reach the square root of n.
+ *
+* */
 class PrimeFactors {
 
     fun ofN(n: Int): MutableList<Int> {
