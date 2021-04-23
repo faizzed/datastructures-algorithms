@@ -22,7 +22,7 @@ private fun factorial(n: Int): Int {
 /**
 * Solve through loop
 */
-private fun factorial2(n: Int): Int {
+private fun factorial2(n: Long): Long {
     var _n = n
     var factorial = _n
     while (_n>1) {
@@ -35,6 +35,8 @@ private fun factorial2(n: Int): Int {
 fun main() {
     for (i in listOf(5, 3, 0, 1, 6, 9)) {
         println(factorial(i))
-        println(factorial2(i))
+        println(factorial2(i.toLong()))
     }
+
+    factorial2(13).also(::println)
 }

@@ -1,7 +1,7 @@
 /**
 * Prime factors of a number are the smallest prime numbers multiplied together to get the number.
 * */
-package algorithms
+package algorithms.prime
 
 import kotlin.math.sqrt
 

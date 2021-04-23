@@ -27,3 +27,13 @@ val randBound: (Int) -> Int = { bound ->
 val logBase2: (Double) -> Double = {
     ln(it) / ln(2.0)
 }
+
+fun Long.factorial(): Long {
+    var _n = this
+    var factorial = _n
+    while (_n>1) {
+        factorial *= (_n-1)
+        _n -= 1
+    }
+    return factorial
+}
