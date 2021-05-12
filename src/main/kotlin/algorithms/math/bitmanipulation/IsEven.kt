@@ -1,7 +1,7 @@
 /**
 * Is the given number even?
 * */
-package algorithms.bitmanipulation
+package algorithms.math.bitmanipulation
 
 import misc.randBound
 

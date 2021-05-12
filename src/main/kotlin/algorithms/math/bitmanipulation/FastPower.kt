@@ -1,4 +1,4 @@
-package algorithms.bitmanipulation
+package algorithms.math.bitmanipulation
 
 import java.time.Instant
 

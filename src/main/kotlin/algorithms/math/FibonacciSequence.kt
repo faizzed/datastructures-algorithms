@@ -3,7 +3,7 @@
  * A sequence where every n is the sum of its two predecessors, starting with 0,1
  * 0,1,1,2,3,5,8,13....
 * */
-package algorithms
+package algorithms.math
 
 import kotlin.math.ceil
 import kotlin.math.pow

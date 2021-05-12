@@ -1,7 +1,7 @@
 /**
  * A number is prime its only divisible by 1 and itself.
 * */
-package algorithms.prime
+package algorithms.math.prime
 
 import kotlin.math.sqrt
 

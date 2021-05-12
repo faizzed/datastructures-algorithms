@@ -1,4 +1,4 @@
-package algorithms
+package algorithms.math
 
 import misc.factorial
 

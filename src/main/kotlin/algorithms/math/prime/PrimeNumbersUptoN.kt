@@ -1,4 +1,4 @@
-package algorithms.prime
+package algorithms.math.prime
 
 /**
  * List prime numbers upto n

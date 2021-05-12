@@ -1,7 +1,7 @@
 /**
  * Determine whether a number is power of two?
  * */
-package algorithms.bitmanipulation
+package algorithms.math.bitmanipulation
 
 import misc.logBase2
 import misc.randBound

@@ -5,7 +5,7 @@
  * n=5
  * 5*4*3*2*1=n!
 * */
-package algorithms
+package algorithms.math
 
 /**
 * Solve through recursion
