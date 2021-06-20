@@ -37,3 +37,11 @@ fun Long.factorial(): Long {
     }
     return factorial
 }
+
+fun <T> Array<T>.isset(i: Int): Boolean {
+    return this.getOrNull(i) != null
+}
+
+fun CharArray.isset(i: Int): Boolean {
+    return this.getOrNull(i) != null
+}

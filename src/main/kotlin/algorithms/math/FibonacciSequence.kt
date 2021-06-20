@@ -68,7 +68,7 @@ class FibonacciSequence {
 
 fun main() {
     FibonacciSequence().apply {
-        for (i in listOf(6, 18, 3, 0, 1, 2, 5)) {
+        for (i in listOf(3, 6, 18, 3, 0, 1, 2, 5)) {
             numberAtIndexUsingRecursion(i).also(::println)
         }
 
