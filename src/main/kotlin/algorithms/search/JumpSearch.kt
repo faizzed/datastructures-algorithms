@@ -74,7 +74,7 @@ class JumpSearch {
 }
 
 fun main() {
-//    JumpSearch().search(99, listOf(23, 3, 18, 9, 6, 5, 4, 2, 6, 99, 55, 9, 18, 6).sorted()).also(::println)
-//    JumpSearch().search(1009, listOf(23, 3, 22, 9, 6, 5, 4, 2, 16, 99, 91, 92, 93, 94, 95, 96, 97, 98, 100, 55, 9, 18, 20).sorted()).also(::println)
+    JumpSearch().search(99, listOf(23, 3, 18, 9, 6, 5, 4, 2, 6, 99, 55, 9, 18, 6).sorted()).also(::println)
+    JumpSearch().search(1009, listOf(23, 3, 22, 9, 6, 5, 4, 2, 16, 99, 91, 92, 93, 94, 95, 96, 97, 98, 100, 55, 9, 18, 20).sorted()).also(::println)
     JumpSearch().search(55, listOf(3, 4, 5, 2).sorted()).also(::println)
 }
