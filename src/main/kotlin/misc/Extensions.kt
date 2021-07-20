@@ -42,6 +42,32 @@ fun <T> Array<T>.isset(i: Int): Boolean {
     return this.getOrNull(i) != null
 }
 
+fun <T> List<T>.isset(i: Int): Boolean {
+    return this.getOrNull(i) != null
+}
+
 fun CharArray.isset(i: Int): Boolean {
     return this.getOrNull(i) != null
+}
+
+fun List<Int>.findMin(): Int {
+    var min = this[0]
+    for (i in this.indices) {
+        if (this[i] < min) {
+            min = this[i]
+        }
+    }
+    return min
+}
+
+fun List<Int>.findMinByIndex(): Int {
+    var min = this[0]
+    var index = 0
+    for (i in this.indices) {
+        if (this[i] < min) {
+            min = this[i]
+            index = i
+        }
+    }
+    return index
 }

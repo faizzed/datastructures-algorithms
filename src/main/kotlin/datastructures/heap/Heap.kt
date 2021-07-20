@@ -54,13 +54,14 @@ class Heap() {
         siftUp(size - 1)
     }
 
-    fun remove() {
+    fun remove(): Int? {
         if (size == 0) {
             throw Exception("Tree is empty")
         }
 
-        removeAndSwapTopElement()
+        val el = removeAndSwapTopElement()
         siftDown(0)
+        return el
     }
 
     /**
@@ -113,7 +114,7 @@ class Heap() {
 }
 
 fun main() {
-    val heap = Heap(20)
+    val heap = Heap(13)
 
     arrayOf(9, 8, 11, 6, 4, 3, 55, 3, 9, 0, 6, 8, 99).forEach {
         heap.insert(it)
@@ -121,19 +122,17 @@ fun main() {
 
     heap.also(::println)
 
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-    heap.remove()
-
-    heap.also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
+    heap.remove().also(::println)
 }
