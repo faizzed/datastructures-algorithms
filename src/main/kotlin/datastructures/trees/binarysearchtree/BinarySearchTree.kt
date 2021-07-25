@@ -2,6 +2,7 @@ package datastructures.trees.binarysearchtree
 
 import datastructures.misc.Node
 import datastructures.misc.TreePrinter
+import datastructures.queue.QueueForBst
 import java.util.*
 
 /**
@@ -324,6 +325,27 @@ class BinarySearchTree: Comparator<Int> {
         if (node?.left != null) inOrderTraversalDesc(node.left)
     }
 
+    fun levelOrderTraversal() {
+        levelOrderTraversal(root)
+    }
+
+    private fun levelOrderTraversal(node: Node<Int>?) {
+        val queue = QueueForBst()
+        queue.add(node!!)
+        while (!queue.isEmpty()) {
+            val _node = queue.poll()
+            print("${_node?.data}\t")
+
+            if (_node?.left != null) {
+                queue.add(_node.left!!)
+            }
+
+            if (_node?.right != null) {
+                queue.add(_node.right!!)
+            }
+        }
+    }
+
     override fun compare(el1: Int, el2: Int): Int {
         return el1 - el2
     }
@@ -338,13 +360,13 @@ class BinarySearchTree: Comparator<Int> {
      * For a large set the graph may break. This is because of the screen size i guess.
     */
     fun printGraph() {
-        TreePrinter.print(root)
+        TreePrinter.print(root, 2)
     }
 }
 
 fun main() {
     BinarySearchTree().apply {
-        addAll(2, 5, 9, 14, 7, 11, 6, 18, 32, 4, 0, 88, 59)
+        addAll(15, 11, 16, 2, 3, 23, 22, 0, 1, 21, 17)
         also(::println)
         contains(5).also(::println)
         contains(99).also(::println)
@@ -355,9 +377,8 @@ fun main() {
         remove(9)
         also(::println)
         height().also(::println)
-        preOrderTraversal().also {
-            println()
-        }
+        preOrderTraversal().also { println() }
+        levelOrderTraversal().also { println() }
         postOrderTraversal().also {
             println()
         }

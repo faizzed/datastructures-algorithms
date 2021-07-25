@@ -1,6 +1,7 @@
 package datastructures.queue
 
 import datastructures.linkedlist.LinkedList
+import datastructures.linkedlist.Node
 
 data class Person(val name: String)
 
@@ -11,15 +12,19 @@ data class Person(val name: String)
  * The elements are enqueued and dequeued in FIFO fashion
  * Imagine a line: A person that arrives first is served first.
  * */
-class Queue {
-    private val linkedList = LinkedList<Person>()
+class Queue<T> {
+    private val linkedList = LinkedList<T>()
 
-    fun push(person: Person) {
+    fun push(person: T) {
         linkedList.add(person)
     }
 
-    fun poll() {
-        linkedList.removeFirst()
+    fun poll(): Node<T>? {
+        return linkedList.removeFirst()
+    }
+
+    fun isEmpty(): Boolean {
+        return linkedList.size == 0
     }
 
     override fun toString(): String {
@@ -28,15 +33,10 @@ class Queue {
 }
 
 fun main() {
-    val queue = Queue()
+    val queue = Queue<Person>()
     queue.push(Person("Peter"))
     queue.push(Person("Jack"))
     queue.push(Person("Chris"))
-
-    queue.also(::println)
-
-    queue.poll()
-    queue.also(::println)
-    queue.poll()
+    queue.poll().also(::println)
     queue.also(::println)
 }
