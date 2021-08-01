@@ -47,7 +47,7 @@ fun main() {
     edges.forEach { graph.addEdge(it.first, it.second) }
 
     println(graph)
-    graph.bfs(Airports.Dusseldorf, Airports.Rostock)
-    print("\n\n")
-    graph.dfs(Airports.Dusseldorf, Airports.Rostock, mutableListOf(), Airports.Dusseldorf.weight)
+//    graph.bfs(Airports.Dusseldorf, Airports.Rostock)
+//    print("\n\n")
+//    graph.dfs(Airports.Dusseldorf, Airports.Rostock, mutableListOf(), Airports.Dusseldorf.weight)
 }

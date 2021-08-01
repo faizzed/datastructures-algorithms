@@ -3,6 +3,10 @@ package datastructures.disjointset
 /**
  * Disjoint set:
  *
+ *
+ * This description is totally wrong whichever site you got it from!!!
+ * Check the visualization here https://www.cs.usfca.edu/~galles/visualization/DisjointSets.html
+ *
  * A collection of disjoint (non-overlapping) sets
  * a={1,2,3,4,5}
  * a={{1,2,3,4}, {5}}
@@ -77,9 +81,7 @@ class DisjointSet {
      * The attachment can be based on a certain condition like whats the size of set a compared to b etc..
     * */
     fun union(a: Int, b: Int) {
-        val x = find(a)
-        val y = find(b)
-        parent[x] = y
+        parent[find(a)] = find(b)
     }
 
     /**
@@ -100,13 +102,14 @@ fun main() {
     DisjointSet().apply {
         makeSet(l)
         union(4,3)
+        union(4,2)
         union(2, 1)
         union(1, 3)
         also(::println)
-        find(2).also(::println)
-        connected(3, 4).also(::println)
-        connected(1, 4).also(::println)
-        connected(3, 5).also(::println)
+//        find(2).also(::println)
+//        connected(3, 4).also(::println)
+//        connected(1, 4).also(::println)
+//        connected(3, 5).also(::println)
     }
 
 }

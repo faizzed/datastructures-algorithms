@@ -1,6 +1,5 @@
 package algorithms.graphs
 
-import algorithms.strings.LevenshteinDistance
 import java.util.*
 
 class GraphTraversal<T> {
