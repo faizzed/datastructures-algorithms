@@ -4,6 +4,15 @@ package algorithms.graphs
 data class Edge(var src: Int, var dest: Int, val weight: Int)
 data class Subset(var key: Int, var parent: Int?, var rank: Int)
 
+/**
+ * Kruskal's Algorithm
+ * 1. Sort the edges by weight
+ * 2. Start picking the edges in desc order, also check that an edge doesnt form a cycle
+ *      Cycles are checked using Union find, where we find the parent of each node and if parent is the same it forms a cycle
+ *      We union edges first by union-ising each edge with another
+ *      Or same edge src and dest
+ * 3. Pick all the edges that doesnt form a cycle in desc order and thats the Kruskal MST
+* */
 class KruskalMST(val edges: MutableList<Edge>) {
     val subsets = MutableList<Subset>(edges.size) {
         Subset(edges[it].src, it, 0)
