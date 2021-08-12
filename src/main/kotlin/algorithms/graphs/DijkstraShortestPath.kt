@@ -1,9 +1,5 @@
 package algorithms.graphs
 
-import java.util.*
-
-// names are in dutch, in tribute to dijkstra
-// and because i have the fucking names in other packages which collides
 data class Vertex(val name: String, var distance: Int = Int.MAX_VALUE, var visited: Boolean = false)
 {
     val linkedEdges = mutableListOf<Path>()
@@ -38,26 +34,26 @@ data class DistanceRow(val to: String, val distance: Int, val via: String, ) {
 }
 
 /**
- * Dijkstra finds the shortest paths inside a graph that connects node x to all the node
+ * Dijkstra finds the shortest paths inside a graph that connects node x to all the nodes in a graph
  * Why is this important?
  *
  * Nodes inside graph can be connected via multiple paths each carrying its own weight, this algorithm
- * sift through all the paths and find the shortest paths that a node x can connect to its neighbours
+ * sift through all the connected paths and find the shortest paths that a node x can connect to its neighbours
  *
- * But kruskal MST does the same thing, it orders the paths via desc and find the shortest paths that doesnt make a cycle
+ * But kruskal MST does the same thing, it orders the paths via desc order and find the shortest paths that doesnt make a cycle
  * Diff being, dijkstra algorithm updates the path along the way, it adjust the distance via the shortest visited route
  *
- * if we visited A -4- B -9- Z
- * and also     A -1- C -9- Z
+ * if we visited A --4-- B --9-- Z
+ * and also     A --1-- C --9-- Z
  *
- * then we say distance to Z via B is 13 and via C is 10, we only consider the path via C because its the shorted one
- * we also add this information to the vertex..
+ * then distance to Z via B is 13 and via C is 10, we only consider the path via C because its the shorted one
+ * we also add this information to the vertex.
  *
  * The data structure to make this algorithm work is also important
  * vertex must have its connected edges and its distance
  * edges must carry the weight thats how we can identify the
  *
- * Or this video https://www.youtube.com/watch?v=pVfj6mxhdMw&t=561s&ab_channel=ComputerScience
+ * More in this video https://www.youtube.com/watch?v=pVfj6mxhdMw&t=561s&ab_channel=ComputerScience
 * */
 class Dijkstra {
     val distances = mutableListOf<DistanceRow>()
