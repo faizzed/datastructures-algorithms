@@ -2,6 +2,23 @@ package algorithms.graphs
 
 import java.util.*
 
+/**
+* Cycle is when one or more vertexs form a cycle, where the a vertex is reachable more then one time from any other vertex
+ *    c
+ *  /  \
+ * a -- b
+ *
+ * These vertexs form a cycle.
+ *
+ * Cycle are avoided in finding shortest path algorithms specially in case where we relax the paths.
+ * They drop the path continuously in loop if there is a negative weight with any associated edge.
+ *
+ * To detect a cycle we either use union find, which attach childs to a group, you can check at the same
+ * time if they are in a similar set, having a similar parent in that case it forms a cycle.
+ * If not then the set is disjoint.
+ *
+ * But its a shitty way in my opinion, detecting cycle via adjacency list is much more understandable
+* */
 class CycleDetectionAdjacencyList {
     val graph = mutableMapOf<String, LinkedList<String>>()
 
@@ -16,23 +33,28 @@ class CycleDetectionAdjacencyList {
     }
 
     fun hasCycle() {
-        for (node in graph) {
-            hasCycle(mutableListOf(), node.key).let {
-                if (it) { println("Node: ${node.key} creates a cycle..") }
+        for (vertex in graph) {
+            hasCycle(mutableListOf(), vertex.key).let {
+                if (it) { println("Node: ${vertex.key} creates a cycle..") }
             }
         }
     }
 
-    private fun hasCycle(visited: MutableList<String>, node: String): Boolean {
+    /**
+     * The basic idea is: start going deeper on an edge, and keep track of visiting vertices on that path
+     * if at any point visiting the child edges along that path we visit an already visited vertex then there is a cycle
+     * Union find is a drag..
+    * */
+    private fun hasCycle(visited: MutableList<String>, vertex: String): Boolean {
 
-        if (visited.contains(node)) {
+        if (visited.contains(vertex)) {
             return true
         }
 
-        visited.add(node)
+        visited.add(vertex)
 
-        if (graph.containsKey(node)) {
-            for (edge in graph[node]!!) {
+        if (graph.containsKey(vertex)) {
+            for (edge in graph[vertex]!!) {
                 if (hasCycle(visited, edge)) {
                     // end the loop because we found cycle..
                     return true

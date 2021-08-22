@@ -1,24 +1,24 @@
 package algorithms.graphs
 
 
-data class Edge(var src: Int, var dest: Int, val weight: Int)
+data class KruskalEdge(var src: Int, var dest: Int, val weight: Int)
 data class Subset(var key: Int, var parent: Int?, var rank: Int)
 
 /**
  * Kruskal's Algorithm
  * 1. Sort the edges by weight
- * 2. Start picking the edges in desc order, also check that an edge doesnt form a cycle
+ * 2. Start picking the edges in desc order, doesnt matter if they are from the visited nodes or not, also check that an edge doesnt form a cycle
  *      Cycles are checked using Union find, where we find the parent of each node and if parent is the same it forms a cycle
  *      We union edges first by union-ising each edge with another
  *      Or same edge src and dest
  * 3. Pick all the edges that doesnt form a cycle in desc order and thats the Kruskal MST
 * */
-class KruskalMST(val edges: MutableList<Edge>) {
+class KruskalMST(val edges: MutableList<KruskalEdge>) {
     val subsets = MutableList<Subset>(edges.size) {
         Subset(edges[it].src, it, 0)
     }
 
-    val result = mutableListOf<Edge>()
+    val result = mutableListOf<KruskalEdge>()
 
     init {
         for (e in edges) {
@@ -81,15 +81,15 @@ class KruskalMST(val edges: MutableList<Edge>) {
 fun main() {
     KruskalMST(
         mutableListOf(
-            Edge(0, 1, 2),
-            Edge(0, 3, 3),
-            Edge(1, 2, 5),
-            Edge(2, 4, 9),
-            Edge(2, 3, 4),
-            Edge(4, 5, 11),
-            Edge(4, 3, 6),
-            Edge(4, 6, 12),
-            Edge(5, 6, 10),
+            KruskalEdge(0, 1, 2),
+            KruskalEdge(0, 3, 3),
+            KruskalEdge(1, 2, 5),
+            KruskalEdge(2, 4, 9),
+            KruskalEdge(2, 3, 4),
+            KruskalEdge(4, 5, 11),
+            KruskalEdge(4, 3, 6),
+            KruskalEdge(4, 6, 12),
+            KruskalEdge(5, 6, 10),
         )
     ).apply {
         result.forEach {
