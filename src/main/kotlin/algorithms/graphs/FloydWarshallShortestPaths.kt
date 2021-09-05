@@ -82,9 +82,21 @@ class FloydWarshall(vertices: List<Pair<FloydWarshallVertex, List<FloydWarshallE
             }
         }
     }
+
+    override fun toString(): String {
+        graph.forEach { (t, u) ->
+            println("$t: $u")
+        }
+        return ""
+    }
 }
 
 fun main() {
+
+    /*
+    * Check graph at resources/diagrams.
+    * */
+
     val vertices = listOf(
         Pair(FloydWarshallVertex("1"), listOf(FloydWarshallEdge("3", -2.0))),
         Pair(FloydWarshallVertex("2"), listOf(FloydWarshallEdge("1", 4.0), FloydWarshallEdge("3", 3.0))),
@@ -93,13 +105,22 @@ fun main() {
     )
 
     FloydWarshall(vertices).apply {
-        graph.forEach { (t, u) ->
-            println("$t: $u")
-        }
+        also(::println)
         shortestPaths()
         println("\n")
-        graph.forEach { (t, u) ->
-            println("$t: $u")
-        }
+        also(::println)
+    }
+
+    val vertices2 = listOf(
+        Pair(FloydWarshallVertex("1"), listOf(FloydWarshallEdge("3", -2.0))),
+        Pair(FloydWarshallVertex("2"), listOf(FloydWarshallEdge("1", 4.0), FloydWarshallEdge("3", 3.0), FloydWarshallEdge("4", -1.0))),
+        Pair(FloydWarshallVertex("3"), listOf(FloydWarshallEdge("4", 2.0))),
+    )
+
+    FloydWarshall(vertices2).apply {
+        also(::println)
+        shortestPaths()
+        println("\n")
+        also(::println)
     }
 }
